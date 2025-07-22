@@ -7,23 +7,81 @@
 
 import UIKit
 
+//클래스, 스트럭트, 연산 프로퍼티
+struct BMI {
+    static var name = "고래밥" //썻다지웠다안하는애는 스태틱
+    let height: Double //인스턴스 프로퍼티이자 저장 프로퍼티에 속한다.
+    let weight: Double
+    
+//    func result() -> String {
+//        let value = weight / (height * height)
+//        if value < 18.5 {
+//            print("저체중")
+//        } else {
+//            print("정상체중")
+//        }
+//    }
+    //주로 저장프로퍼티를 통해 연산(get, set)을 한다. //때마다 값이 바뀌므로 let이 없고 var만 있다.
+//    var result: String {
+//        let value = weight / (height * height)
+//        if value < 18.5 {
+//            print("저체중")
+//        } else {
+//            print("정상체중")
+//        }
+//    }
+    //위에꺼에 사실 아래처럼 get이 숨어있던거
+    var result: String { //get만 있는 경우 get은 생략가능
+        get {
+            var value = weight / (height * height)
+            if value < 18.5 {
+                return("저체중") //implicit return : 한 줄은 return 생략가능 :여긴 여러줄이라 생략하면 에러
+            } else {
+                return "정상체중"
+            }
+        }
+        set {
+            BMI.name = newValue
+        }
+    }
+    
+    
+    
+}
+
+
 class ViewController: UIViewController {
 
     @IBOutlet var heightTextField: UITextField!
     @IBOutlet var weightTextField: UITextField!
     @IBOutlet var goButton: UIButton!
     
-    
-    
+    var bmi = BMI(height: 1.8, weight: 80)
+    //이걸 10개 정도 선언하면? : 매번 공간 차지
     
     var nickname: String?
     var age: Int?
 
     
     
-    
+    var ud = UserDefaultsHelper()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //UserDefaults를 간결하게 쓸 수 있음
+        print(ud.name, ud.age)
+        
+        UserDefaults.standard.set(100, forKey: "age") //이걸 연산프로퍼티 set안으로 넣으면 이렇게 길게 안써도 되고 간결하게 바로 변경가능 밑에밑에줄
+        UserDefaults.standard.set("aa", forKey: "name")
+        
+        ud.name = "JACK" //애플이 정한 set의 newValue에 넣어줌
+        ud.age = 345
+        
+        print(ud.name, ud.age)
+
+
+    
         
         //변수명을 원래는 다르게 해야하지만 번거로워서 보통은 같은이름의 변수에 넣음
         //이름 똑같으면 간소화 가능해서 생략가능
@@ -31,8 +89,6 @@ class ViewController: UIViewController {
         }
         if let nickname, let age { //if let shorthand(이프렛 간소화:간단한 애들은 이렇게가 가능) //위아래 같은 의미
         }
-        
-        
         
         
         goButton.addTarget(self, action: #selector(goButtonClicked), for: .touchUpInside)
@@ -77,9 +133,26 @@ class ViewController: UIViewController {
 //        print(heightTextField?.text)
         
         
+        print(BMI.self.name) //사실 가운데 셀프가 생략되어 있음
+        print(BMI.name)
+        print(bmi.height, bmi.weight)
+        let result = bmi.weight / (bmi.height * bmi.height)
+        if result < 18.5 {
+            print("저체중")
+        } else {
+            print("정상체중")
+        }
+        //나 뷰컨이라 present만 하면되는데 bmi계산 연산까지 해야됨?: 굳이 또 변수에 담아서 값들을 또한번 가져오기까지 해서 연산을 해야하나 그래서 위에 스트럭트 너가 연산해서 보내라 : bmi.도 안해도되고 좋지
+        //print(bmi.result())
+        //print(bmi.result)
+        
+        bmi.result = "sesac"
+        print(BMI.name)
+
         
         
         
+        /*
         
         //아래구문을 가드문으로
         //guard 주의사항 : "print를 꼭 써보자!"
@@ -97,7 +170,7 @@ class ViewController: UIViewController {
               }
         print("키:", height)
         
-        
+        */
         
         
         //2글자 이상일때 실행되게
