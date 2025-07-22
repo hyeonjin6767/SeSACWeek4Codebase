@@ -23,6 +23,7 @@ class ResultViewController: UIViewController {
     
     //1,2번이 필요
     
+    //@IBOutlet let resultLabel = UILabel() 이었던걸 코드로 아래처럼
     let resultLabel = UILabel() //인스턴스 생성해서 resultLabel에 담았다 :3번 과정 대신
     
     let redView = UIView()
@@ -32,6 +33,7 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        //3
         //SnapKit기반 : 레이아웃 코드만 바뀜
         view.addSubview(resultLabel) //순서도 레이아웃보다 먼저
         redView.addSubview(blackView) //레브뷰안에 블랙뷰
@@ -81,11 +83,10 @@ class ResultViewController: UIViewController {
         }
         blackView.backgroundColor = .black
 
-        
-       
     }
     
     //viewDidLoad에 했던걸 함수로 아래로 빼두자
+    //2
     
     func practiceAutoLayoutBased() {
         
@@ -96,17 +97,17 @@ class ResultViewController: UIViewController {
         //AutoResizing기능 끄기: 필수
         resultLabel.translatesAutoresizingMaskIntoConstraints = false //아래에서 만든 안보이던 레이블이 보임 : 이게 false로 되어 있어야 모든 레이아웃이 적용됨, true로 되면 기본 레이아웃(오토레이아웃 잡기 전 상태:AutoResizing기능: 레이아웃 설정한 순간 꺼짐 : 오토레이아웃과 동시 적용 불가)이라 안보임
         
-//        //우리가 스토리보드에서 잡은 오토레이아웃(NSLayoutConstraint) //위 20 왼 오 20 높이 44
-//        let leading = NSLayoutConstraint(item: resultLabel, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 20)
-//        //toItem: view == uiview기준으로 잡을래, constant: 20 == 간격20
-//        //leading.isActive = true //오토레이아웃의 빨간줄:뒤에 .isActive = true로 한줄로도 작성 가능
-//        let trailing = NSLayoutConstraint(item: resultLabel, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -20) //-20인 이유:
-//        let bottom = NSLayoutConstraint(item: resultLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -20)
-//        let top = NSLayoutConstraint(item: resultLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 44)
+        //우리가 스토리보드에서 잡은 오토레이아웃(NSLayoutConstraint) //위 20 왼 오 20 높이 44
+        let leading = NSLayoutConstraint(item: resultLabel, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 20)
+        //toItem: view == uiview기준으로 잡을래, constant: 20 == 간격20
+        //leading.isActive = true //오토레이아웃의 빨간줄:뒤에 .isActive = true로 한줄로도 작성 가능
+        let trailing = NSLayoutConstraint(item: resultLabel, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -20) //-20인 이유:
+        let bottom = NSLayoutConstraint(item: resultLabel, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: -20)
+        let top = NSLayoutConstraint(item: resultLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 44)
 
-//        //이렇게 길게 안짜도 됨 : 좀더 간단하게
-//        //.isActive = true 대신
-//        view.addConstraints([leading, trailing, bottom, top])
+        //이렇게 길게 안짜도 됨 : 좀더 간단하게
+        //.isActive = true 대신
+        view.addConstraints([leading, trailing, bottom, top])
         
         //더 간소하게 쓸 수 있는 방법이 NSLayoutAnchor
         // NSLayoutConstraint 와 NSLayoutAnchor 합친게 snapkit
@@ -119,6 +120,7 @@ class ResultViewController: UIViewController {
     }
     
     //viewDidLoad에 했던걸 함수로 아래로 빼두자
+    //1
 
     func practiceFrameBased() {
         

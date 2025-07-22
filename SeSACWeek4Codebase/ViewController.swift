@@ -13,8 +13,27 @@ class ViewController: UIViewController {
     @IBOutlet var weightTextField: UITextField!
     @IBOutlet var goButton: UIButton!
     
+    
+    
+    
+    var nickname: String?
+    var age: Int?
+
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //변수명을 원래는 다르게 해야하지만 번거로워서 보통은 같은이름의 변수에 넣음
+        //이름 똑같으면 간소화 가능해서 생략가능
+        if let nickname = nickname, let age = age {
+        }
+        if let nickname, let age { //if let shorthand(이프렛 간소화:간단한 애들은 이렇게가 가능) //위아래 같은 의미
+        }
+        
+        
+        
         
         goButton.addTarget(self, action: #selector(goButtonClicked), for: .touchUpInside)
         //"Function Type" Preview : 함수 이름만 쓰는게 어색 : 결국엔 "타입" : 모든 변수가 가진 타입 //어떤 매개변수, 어떤 반환값을 갖는지에 따라 달라짐
@@ -42,17 +61,103 @@ class ViewController: UIViewController {
         print("=")
         return "안녕하세요"
     }
+    
     //항상 같은 이름의 함수 쓰지 않기
     @objc func goButtonClicked() { //여기 괄호는 "실행"
         
         //let vc1 = self.storyboard?.instantiateViewController(identifier: "ResultViewController") as! ResultViewController
         //리절트뷰컨 오브젝트를 안만들고(스토리보드에 없을때) 코코아터치 뷰컨 파일만 만들고 코드로 만들기
         //스토리보드가 있는데 아래처럼 하면 에러
-        let vc2 = ResultViewController() //ResultViewController도 클래스이기 때문에 인스턴스 생성(초기화) //여기서 괄호는 : 클래스 안에 아무것도 없지만 클래스는 사용하고 싶을 떄 : 인스턴스라는 공간을 만들게 되고 그럼 빈 괄호가 됨: 우리 눈에 보이지 않는 init(이니셜라이즈의 줄임)이라는 기능이 자동으로 지원됨: 이니셜라이즈가 된다 cf)함수의 호출 연산자와 모양은 같지만 다른 역할
+//        let vc2 = ResultViewController() //ResultViewController도 클래스이기 때문에 인스턴스 생성(초기화) //여기서 괄호는 : 클래스 안에 아무것도 없지만 클래스는 사용하고 싶을 떄 : 인스턴스라는 공간을 만들게 되고 그럼 빈 괄호가 됨: 우리 눈에 보이지 않는 init(이니셜라이즈의 줄임)이라는 기능이 자동으로 지원됨(이니셜라이즈가 된다) cf)함수의 호출 연산자와 모양은 같지만 다른 역할.
+//       present(vc2, animated: true)
         
-        present(vc2, animated: true)
+        //스토리보드가 없으면 레이블같은 오브젝트들은 어떻게 올리지? : ResultViewController에서.
         
-        //스토리보드가 없으면 레이블같은 오브젝트들은 어떻게 올리지?
+//        print(weightTextField?.text?.count) //  옵셔널 체이닝
+//        print(heightTextField?.text)
+        
+        
+        
+        
+        
+        
+        //아래구문을 가드문으로
+        //guard 주의사항 : "print를 꼭 써보자!"
+        guard let height = heightTextField.text,
+              height.count > 2 else {
+            print("키 텍스트필드가 2글자 미만입니다.")
+            return //여기서 끝나면 고버튼함수 자체도 완전 끝나버려서 리턴아래 print("키:", height)는  실행안되고 끝나니까 꼭 리턴 전에 프린트해보기! //그래서 둘 중 하나가 안되더라도 어떤 텍스트필드가 잘못 되었는지 특정할 수 있음
+
+              }
+        print("키:", height) // 앞에서 가드문에서 height이 이상이 없다는걸 확인했으므로 밖에서도 사용 가능한것.
+        //바깥에서 height으로 지지고볶고 연산같은게 가능하다는 장점이 있음
+        guard let weight = weightTextField.text,
+              height.count > 2 else {
+            return
+              }
+        print("키:", height)
+        
+        
+        
+        
+        //2글자 이상일때 실행되게
+//        let height = heightTextField.text
+//        if height?.count ?? 0 > 2 {
+//            
+//        } else {
+//            
+//        }
+        /*
+        //위에 구문을 if let으로
+        if let height = heightTextField.text, height.count > 2  { //height을 앞에서 닐이 아닌걸 한번 체크했으면 뒤에 카운트 구문에서 체크 가능
+            print(height)
+            
+        } else {
+            print("키 텍스트필드가 2글자 미만입니다.")
+        }
+        if let weight = weightTextField.text, weight.count > 2  { //height을 앞에서 닐이 아닌걸 한번 체크했으면 뒤에 카운트 구문에서 체크 가능
+            print(weight)
+            
+        } else {
+            print("몸무게 텍스트필드가 2글자 미만입니다.")
+        }
+        //위에 두개의 이프문을 하나로
+        //둘 중 하나가 안되더라도 어떤 텍스트필드가 잘못 되었는지 특정할 수 있음
+        //두 변수(height, weight)가 쓸 수 있는 범위가 달라져서 합치는거에 장단점이 있음
+        */
+        
+        
+        /*
+        //guard
+        guard let weight = weightTextField.text,
+              let height = heightTextField.text else { //중괄호의 순서에서 else문이 먼저 나옴 : 참이면 else문을 패스하고 리턴으로 바깥에 나와버림(early exit) + if let과 달리 중괄호 바깥에서도 사용가능
+            print("weightTextField, heightTextField가 nil인 상태")
+            return //early exit
+              }
+        
+        
+        //느낌표를 최대한 안쓰는 방향으로
+       //옵셔널 바인딩
+        if let weight = weightTextField.text,
+            let height = heightTextField.text { //한번에 여러개도 가능
+            //nil이 아닌지 체크되기 때문에 weight은 옵셔널 타입이 아니고 그냥 스트링 타입이 됨
+            print(weight.count, height.count) //이제 카운트 앞에 물음표 안붙어도 됨
+        } else {
+            print("weightTextField, heightTextField가 nil인 상태")
+        }
+        //아래꺼를 위에껄로
+        
+//        let weight = weightTextField.text
+//        let height = heightTextField.text
+//        
+//        //체크1. weight nil
+//        //체크2. double nil
+//        let result = Double(weight ?? "0") //1.예외처리
+//        
+//        print(result)
+//
+         */
+        
         
     }
 
