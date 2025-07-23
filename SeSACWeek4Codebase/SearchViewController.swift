@@ -79,7 +79,7 @@ extension SearchViewController: JackNavigationProtocol {
     }
     
     func configureButton() {
-        <#code#>
+        navigationItem.title = myTitle //에러나서 암거나 해둔거
     }
     
 }
