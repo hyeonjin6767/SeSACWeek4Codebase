@@ -44,10 +44,10 @@ class MarketTableViewCell: UITableViewCell {
 extension MarketTableViewCell: ViewDesignProtocol {
     
     func configureHierarchy() {
-        //view?.addSubview(nameLabel)가 아니라 콜렉션뷰에는 뷰가 없고 "컨텐트뷰"가 있음
-        //주의사항: 아래처럼 셀프로 쓰면 : 보이고 레이아웃도 잘 잡히지만 버튼 같은 클릭되는 요소들이 클릭이 안됨
+        //view?.addSubview(nameLabel)가 아니라 테이블뷰에는 뷰가 없고 "컨텐트뷰(contentView)"가 있음
+        //주의사항: 아래처럼 self.으로 쓰면 : 보이고 레이아웃도 잘 잡히지만 버튼 같은 클릭되는 요소들이 클릭이 안됨
         //self?.addSubview(nameLabel)
-        //안전하게 contentView에 넣어주자
+        //안전하게 셀에서는 contentView에 넣어주자
         contentView.addSubview(nameLabel)
     }
     
