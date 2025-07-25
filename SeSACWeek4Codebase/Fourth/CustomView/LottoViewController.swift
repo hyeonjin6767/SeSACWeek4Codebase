@@ -43,7 +43,7 @@ class LottoViewController: UIViewController {
             //식판에 잘 담겼는지 안담겼는지 체크 : 성공,실패(인터넷느림, 끊김 등등)
             switch response.result {
             case .success(let value):
-                print("secess", value)
+                print("success", value)
                 
                 self.resulLabel.text = value.drwNoDate //이런 스위치 중괄호 안에서는 self.가 필수: 명확히 해주는 것
                 
@@ -65,7 +65,8 @@ class LottoViewController: UIViewController {
 //            //주의1. URL이 잘못되어서 요청도 안되는 경우
 //            //주의2. 필요한 정보를 누락해서 제대로 된 응답이 안오는 경우
 //            //주의3. 서버에서는 응답을 잘 해줬지만 , 식판에 데이터가 안담기는 경우
-//            //체크1. responseString으로 알맞은 데이터가 오고 있는지 확인!
+        
+//            //체크1. "responseString"으로 알맞은 데이터가 오고 있는지 확인!
 //            //체크2. 구조체(식판)를 만들기
 //            print("response end") //이게 응답보다 먼저 프린트되는걸 알수 있음 : "비동기" : 인터넷이 느리거나 끊길 때: 우선은 요청 함수를 끝나고 나중에 응답을 받음
 //        }

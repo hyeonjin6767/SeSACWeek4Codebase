@@ -31,13 +31,12 @@ class PurpleTextField: UITextField { //UITextField가 부모
     
     
     
-    //init은 커스텀도 가능
+    //init은 커스텀도 가능: 위에 override init에 커스텀하면 좋겠지만 애플에서 만든거라 커스텀 불가 그래서 새로 내 이퀄라이저(init)를 만들기
     //즉시 실행 함수에서도 반복되는 부분(placeholder,keyboardType)도 개선해보자
     init(placeholder: String, keyboard: UIKeyboardType) {
-        //위에 init에서 복붙해옴..: 에러 잔뜩: super(부모클래스 초기화)안해서 에러 발생한거
-        //내껄 초기화 하더라도 부모클래스의 프로퍼티도 모두 초기화를 먼저 해야 함!
-        //super.init(frame: frame) //여긴 frame이 없는데 어떡하지? : 제약조건 설정하기 전에 위치값을 달라는 것:좌표:아무좌표나 넣어도 되는 이유가 어차피 나중에 스냅킷으로 레이아웃 다시 잡으니까 상관 없음
-        super.init(frame: .zero) //super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        //위에 init에서 복붙해옴..: 에러 잔뜩: super(부모클래스 초기화)안해서 에러 발생한거: 내껄 초기화 하더라도 부모클래스의 프로퍼티도 모두 초기화를 먼저 해야 함!
+        //super.init(frame: frame) //여긴 위에 init과 달리 frame이 없는데 어떡하지? : 제약조건 설정하기 전에 위치값(좌표)을 달라는 것(위치가 정해져 있지 않으면 제약조건을 걸 수 없으니까): 아무좌표나 넣어도 되는 이유가 어차피 나중에 스냅킷으로 레이아웃 다시 잡히니까 형식상 아무 좌표(주로 0값들)를 넣어주는것
+        super.init(frame: .zero) //혹은 : super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         print("코드 custom init")
         
         self.placeholder = placeholder //얘네 둘을 위에 애플에 init에 만들고 싶은데 애플꺼는 못 수정해서 나의 커스텀 init을 따로 만드는 것
@@ -51,6 +50,7 @@ class PurpleTextField: UITextField { //UITextField가 부모
         self.backgroundColor = .white
         self.tintColor = .systemPurple
     }
+    
     
     
     

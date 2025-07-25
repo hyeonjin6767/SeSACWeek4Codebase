@@ -127,7 +127,7 @@ class ViewController: UIViewController {
         //let vc1 = self.storyboard?.instantiateViewController(identifier: "ResultViewController") as! ResultViewController
         //리절트뷰컨 오브젝트를 안만들고(스토리보드에 없을때) 코코아터치 뷰컨 파일만 만들고 코드로 만들기
         //스토리보드가 있는데 아래처럼 하면 에러
-        let vc2 = MarketViewController() //ResultViewController도 클래스이기 때문에 인스턴스 생성(초기화) //여기서 괄호는 : 클래스 안에 아무것도 없지만 클래스는 사용하고 싶을 떄 : 인스턴스라는 공간을 만들게 되고 그럼 빈 괄호가 됨: 우리 눈에 보이지 않는 init(이니셜라이즈의 줄임)이라는 기능이 자동으로 지원됨(이니셜라이즈가 된다) cf)함수의 호출 연산자와 모양은 같지만 다른 역할.
+        let vc2 = BookViewController() //ResultViewController도 클래스이기 때문에 인스턴스 생성(초기화) //여기서 괄호는 : 클래스 안에 아무것도 없지만 클래스는 사용하고 싶을 떄 : 인스턴스라는 공간을 만들게 되고 그럼 빈 괄호가 됨: 우리 눈에 보이지 않는 init(이니셜라이즈의 줄임)이라는 기능이 자동으로 지원됨(이니셜라이즈가 된다) cf)함수의 호출 연산자와 모양은 같지만 다른 역할.
        present(vc2, animated: true)
         
         //스토리보드가 없으면 레이블같은 오브젝트들은 어떻게 올리지? : ResultViewController에서.

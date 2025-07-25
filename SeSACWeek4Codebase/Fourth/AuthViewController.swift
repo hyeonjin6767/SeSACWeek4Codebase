@@ -99,7 +99,7 @@ class AuthViewController: UIViewController {
         
         picker.preferredDatePickerStyle = .wheels
         picker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
-        //self도 인스턴스 프로퍼티라 생성 시점이 ageTextField와 같아 버려서 경고창 뜸..: 해결
+        //self도 인스턴스 프로퍼티라 생성 시점이 ageTextField와 같아 버려서 경고창 뜸..: lazy로 해결
         
         
         passwordTextField.delegate = self
